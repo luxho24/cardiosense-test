@@ -1,11 +1,83 @@
-@import url("https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap");
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
-html {
-  font-family: "Montserrat", sans-serif;
+/* Animación de Fade In */
+@keyframes fadeInUp {
+  0% {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
-*:focus {
-  outline: none;
+
+/* Animación de Scale Up con Sombra */
+@keyframes scaleUp {
+  0% {
+    transform: scale(1);
+    box-shadow: 0 0 0 rgba(243, 217, 217, 0.66);
+  }
+  100% {
+    transform: scale(1.05);
+    box-shadow: 0 8px 16px rgba(238, 203, 203, 0.3);
+  }
+}
+
+/* Efecto de brillo para los botones */
+@keyframes glow {
+  0% {
+    box-shadow: 0 0 5px rgba(207, 194, 194, 0.4), 0 0 10px rgba(44, 30, 30, 0.4), 0 0 15px rgba(248, 245, 245, 0.3);
+  }
+  100% {
+    box-shadow: 0 0 20px rgba(205, 189, 189, 0.4), 0 0 30px rgba(42, 35, 35, 0.5), 0 0 40px rgba(122, 107, 107, 0.3);
+  }
+}
+
+/* Fade In */
+.fade-in-up {
+  animation: fadeInUp 1s ease-out forwards;
+}
+
+/* Hover de escalado */
+.subscription-hover:hover {
+  animation: scaleUp 0.3s ease-in-out forwards;
+  cursor: pointer;
+}
+
+/* Botones con gradiente y efecto glow */
+.glow-on-hover:hover {
+  animation: glow 0.8s ease-in-out infinite alternate;
+  background-image: linear-gradient(to right, #C8102E, #C8102E);
+  transition: background-color 0.5s, box-shadow 0.3s;
+}
+
+/* Sombra en títulos para resaltar */
+.glow-title {
+  text-shadow: 2px 2px 10px rgba(255, 0, 0, 0.8);
+}
+
+/* Gradientes para los botones */
+.gradient-bg-red {
+  background-image: linear-gradient(to right, #e9e8e8, #e9e8e8);
+}
+
+/* Transiciones suaves para el hover de los botones */
+.transition-bg {
+  transition: background-color 0.4s ease-in-out;
+}
+
+/* Botones que cambian de color con hover */
+.bg-hover-red:hover {
+  background-color: #ff5252;
+}
+
+.bg-hover-green:hover {
+  background-color: #0ff489;
+}
+
+.bg-hover-blue:hover {
+  background-color: #e6430d;
 }
