@@ -2,6 +2,7 @@
 @tailwind components;
 @tailwind utilities;
 
+<<<<<<< Updated upstream
 /* Animación de Fade In */
 @keyframes fadeInUp {
   0% {
@@ -12,6 +13,12 @@
     opacity: 1;
     transform: translateY(0);
   }
+=======
+
+
+html {
+  font-family: "Montserrat", sans-serif;
+>>>>>>> Stashed changes
 }
 
 /* Animación de Scale Up con Sombra */
@@ -26,6 +33,7 @@
   }
 }
 
+<<<<<<< Updated upstream
 /* Efecto de brillo para los botones */
 @keyframes glow {
   0% {
@@ -81,3 +89,8 @@
 .bg-hover-blue:hover {
   background-color: #e6430d;
 }
+=======
+
+
+
+>>>>>>> Stashed changes
