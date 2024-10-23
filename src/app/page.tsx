@@ -1,29 +1,16 @@
-<<<<<<< Updated upstream
-import React from 'react';
-import './globals.css';  // Asegúrate de importar el archivo CSS
-
-function SubscriptionPage() {
-  return (
-    <div className="min-h-screen bg-black text-white flex items-center justify-center">
-      <div className="container mx-auto px-4 py-8">
-        <div className="text-center mb-12">
-          <h1 className="text-4xl font-bold glow-title mb-4 fade-in-up">
-            Planes de Suscripción
-=======
 "use client";
 
 import { useEffect, useState, useCallback, useRef } from "react";
 import Head from "next/head";
 import { motion } from "framer-motion";
-import Toastify from 'toastify-js'; // Importa Toastify para que TypeScript lo reconozca
-import "toastify-js/src/toastify.css"; // Asegúrate de importar también el CSS
+import Toastify from 'toastify-js';
+import "toastify-js/src/toastify.css";
 
 type ThrottleFunction = (...args: any[]) => void;
 
-// Declara la propiedad botpress en el objeto Window
 declare global {
   interface Window {
-    botpress: any; // Si tienes tipos más específicos para botpress, puedes definirlos aquí
+    botpress: any;
   }
 }
 
@@ -51,7 +38,7 @@ const throttle = (func: ThrottleFunction, limit: number): ThrottleFunction => {
 export default function Home() {
   const [scrollY, setScrollY] = useState(0);
   const scrollContainerRef = useRef<HTMLDivElement | null>(null);
-  const ctaSectionRef = useRef<HTMLDivElement | null>(null); // Ref para la sección de llamada a la acción
+  const ctaSectionRef = useRef<HTMLDivElement | null>(null);
 
   const handleScroll = useCallback(
     throttle(() => {
@@ -131,16 +118,16 @@ export default function Home() {
     document.body.appendChild(script);
 
     const botpressScript = document.createElement('script');
-    botpressScript.src = "https://cdn.botpress.cloud/webchat/v2.1/inject.js";
+    botpressScript.src = "https://cdn.botpress.cloud/webchat/v2/inject.js";
     botpressScript.defer = true;
     document.body.appendChild(botpressScript);
 
     botpressScript.onload = () => {
-      window.botpress.on('*', (event: any) => { // Especifica el tipo `any` para evitar el error de tipo
+      window.botpress.on('*', (event: any) => {
         Toastify({ text: `Event: ${event.type}` }).showToast();
       });
 
-      window.botpress.on('webchat:ready', (conversationId: string) => { // Añade tipo `string` al parámetro
+      window.botpress.on('webchat:ready', (conversationId: string) => {
         Toastify({ text: 'Webchat Ready' }).showToast();
       });
 
@@ -156,7 +143,7 @@ export default function Home() {
         Toastify({ text: `Conversation: ${conversationId}` }).showToast();
       });
 
-      window.botpress.on('message', (message: any) => { // Especifica `any` para mensaje
+      window.botpress.on('message', (message: any) => {
         Toastify({ text: `Message Received: ${message.id}` }).showToast();
       });
 
@@ -180,9 +167,9 @@ export default function Home() {
         Toastify({ text: 'Received a custom event' }).showToast();
       });
     };
-    
+
     const botpressConfigScript = document.createElement('script');
-    botpressConfigScript.src = "https://mediafiles.botpress.cloud/205408ca-7d63-4355-a020-feefb809729a/webchat/v2.1/config.js";
+    botpressConfigScript.src = "https://mediafiles.botpress.cloud/26a83f89-ace1-4045-92ba-95b836f75669/webchat/v2/config.js";
     botpressConfigScript.defer = true;
     document.body.appendChild(botpressConfigScript);
 
@@ -203,10 +190,6 @@ export default function Home() {
         />
         <link href="https://cdn.jsdelivr.net/npm/toastify-js@1.12.0/src/toastify.min.css" rel="stylesheet" />
       </Head>
-
-      <div id="botpress-webchat"></div>
-
-
 
       <header className="fixed top-0 left-0 w-full bg-white shadow-md z-50">
         <nav className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex justify-between items-center py-4">
@@ -247,63 +230,205 @@ export default function Home() {
         >
           <h1 className="text-6xl font-extrabold text-white tracking-tight">
             Genera Rutinas Personalizadas
->>>>>>> Stashed changes
           </h1>
-          <p className="text-gray-400 fade-in-up">Elige el plan que mejor se ajuste a tus necesidades</p>
+          <p className="text-2xl text-gray-300 mt-4">
+            Planifica tu entrenamiento con IA adaptada a tus necesidades.
+          </p>
+          <button
+            onClick={scrollToBottom}
+            className="mt-8 inline-block px-8 py-4 bg-[#6E54B5] text-white font-bold rounded-full hover:bg-[#553a92] transition-all duration-300"
+          >
+            ¡Empieza ahora!
+          </button>
+        </motion.div>
+      </motion.section>
+
+      {/* How it Works Section */}
+      <motion.section
+        id="cómofunciona"
+        className="py-20 bg-white text-gray-800"
+        initial="hidden"
+        whileInView="visible"
+        viewport={{ once: false, amount: 0.3 }}
+        transition={{ duration: 0.8 }}
+        variants={sectionVariants}
+      >
+        <div className="max-w-6xl mx-auto px-4">
+          <h2 className="text-4xl font-bold text-center mb-12">¿Cómo funciona?</h2>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+            {[
+              {
+                title: "1. Ingresa tus Objetivos",
+                description:
+                  "Introduce tu información y objetivos para que la IA cree un plan único para ti.",
+                img: "https://us.123rf.com/450wm/nd3000/nd30001909/nd3000190900284/129471613-grupo-de-deportistas-en-un-entrenamiento-de-gimnasio.jpg?ver=6",
+              },
+              {
+                title: "2. IA Personaliza tu Rutina",
+                description:
+                  "Nuestra IA adapta la rutina basada en tu condición física y metas.",
+                img: "https://us.123rf.com/450wm/casanowe/casanowe2006/casanowe200600242/150624914-entrenador-musculoso-guapo-mirando-el-plan-de-fitness-en-el-portapapeles-para-hacer-ejercicio-en-el.jpg?ver=6",
+              },
+              {
+                title: "3. Horarios Flexibles",
+                description:
+                  "Recibe un horario detallado con rutinas para entrenar de lunes a viernes.",
+                img: "https://us.123rf.com/450wm/nd3000/nd30001811/nd3000181101335/112583992-grupo-de-j%C3%B3venes-corriendo-en-cintas-de-correr-en-el-moderno-gimnasio-deportivo.jpg?ver=6",
+              },
+            ].map((feature, index) => (
+              <motion.div
+                key={index}
+                className="bg-gray-100 p-6 rounded-lg shadow-lg text-center transition-transform duration-300 transform hover:scale-105"
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.5, delay: index * 0.2 }}
+              >
+                <img src={feature.img} alt={feature.title} className="w-20 h-20 mx-auto mb-4 rounded-full shadow-md object-cover" />
+                <h3 className="text-2xl font-semibold mb-4">{feature.title}</h3>
+                <p className="text-gray-700">{feature.description}</p>
+              </motion.div>
+            ))}
+          </div>
         </div>
+      </motion.section>
 
-        <div className="flex flex-col md:flex-row justify-center items-center space-y-6 md:space-y-0 md:space-x-1">
-          {/* Plan Básico */}
-          <div className="w-full md:w-1/3 p-7 bg-gray-800 rounded-lg shadow-md subscription-hover fade-in-up">
-            <div className="text-center">
-              <h2 className="text-2xl font-semibold text-red-500">Básico</h2>
-              <p className="text-4xl font-bold my-1 text-white">S/.9.99</p>
-              <p className="text-sm text-gray-400 mb-7">por un mes</p>
-              <p className="text-gray-400 border-b border-gray-500 pb-2">1 CPU para procesamiento</p>
-              <p className="text-gray-400 border-b border-gray-500 pb-2">500 GB de Almacenamiento</p>
-              <p className="text-gray-400 border-b border-gray-500 pb-2">Soporte para 2 Usuarios</p>
-              <p className="text-gray-400 border-b border-gray-500 pb-2 mb-8">Reportes Semanales</p>
-              <button className="glow-on-hover gradient-bg-red text-black py-2 px-4 rounded-lg w-full">
-                Comprar ahora
-              </button>
-            </div>
-          </div>
-
-          {/* Plan Estándar */}
-          <div className="w-full md:w-1/3 p-12 bg-red-500 rounded-lg shadow-md subscription-hover fade-in-up">
-            <div className="text-center">
-              <h2 className="text-2xl font-semibold text-white">Estándar</h2>
-              <p className="text-4xl font-bold my-1 text-white">S/.19.99</p>
-              <p className="text-sm text-gray-200 mb-7">por un mes</p>
-              <p className="text-gray-200 border-b border-gray-100 pb-2">4 CPU para procesamiento avanzado</p>
-              <p className="text-gray-200 border-b border-gray-100 pb-2">1 TB de Almacenamiento</p>
-              <p className="text-gray-200 border-b border-gray-100 pb-2">Soporte para 5 Usuarios</p>
-              <p className="text-gray-200 border-b border-gray-100 pb-2 mb-8">Reportes Diarios</p>
-              <button className="glow-on-hover gradient-bg-red text-black py-2 px-4 rounded-lg w-full">
-                Comprar ahora
-              </button>
-            </div>
-          </div>
-
-          {/* Plan Premium */}
-          <div className="w-full md:w-1/3 p-7 bg-gray-800 rounded-lg shadow-md subscription-hover fade-in-up">
-            <div className="text-center">
-              <h2 className="text-2xl font-semibold text-red-500">Premium</h2>
-              <p className="text-4xl font-bold my-1 text-white">S/.29.99</p>
-              <p className="text-sm text-gray-400 mb-7">por un mes</p>
-              <p className="text-gray-400 border-b border-gray-500 pb-2">8 CPU para procesamiento intensivo</p>
-              <p className="text-gray-400 border-b border-gray-500 pb-2">2 TB de Almacenamiento</p>
-              <p className="text-gray-400 border-b border-gray-500 pb-2">Soporte para 10 Usuarios</p>
-              <p className="text-gray-400 border-b border-gray-500 pb-2 mb-8">Reportes en Tiempo Real</p>
-              <button className="glow-on-hover gradient-bg-red text-black py-2 px-4 rounded-lg w-full">
-                Comprar ahora
-              </button>
-            </div>
+      {/* Horarios Section */}
+      <motion.section
+        id="horarios"
+        className="py-20 bg-gray-200 text-gray-800"
+        initial="hidden"
+        whileInView="visible"
+        viewport={{ once: false, amount: 0.3 }}
+        transition={{ duration: 0.8 }}
+        variants={sectionVariants}
+      >
+        <div className="max-w-6xl mx-auto px-4">
+          <h2 className="text-4xl font-bold text-center mb-12">Horarios</h2>
+          <div
+            ref={scrollContainerRef}
+            className="flex space-x-6 overflow-x-hidden p-4 relative"
+            style={{ scrollBehavior: "smooth" }}
+          >
+            {weekDays.concat(weekDays).map((day, index) => (
+              <div
+                key={index}
+                className="min-w-[250px] h-[350px] bg-white rounded-lg shadow-lg flex flex-col items-center justify-center text-center p-6 transition-transform duration-300 transform hover:scale-105"
+              >
+                <h3 className="text-2xl font-semibold mb-4">{day.day}</h3>
+                <ul className="text-gray-700">
+                  {day.exercises.map((exercise, i) => (
+                    <li key={i} className="mb-2">
+                      {exercise}
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            ))}
           </div>
         </div>
-      </div>
+      </motion.section>
+
+      {/* Testimonials Section */}
+      <motion.section
+        id="testimonios"
+        className="py-20 bg-white text-gray-800"
+        initial="hidden"
+        whileInView="visible"
+        viewport={{ once: false, amount: 0.3 }}
+        transition={{ duration: 0.8 }}
+        variants={sectionVariants}
+      >
+        <div className="max-w-6xl mx-auto px-4">
+          <h2 className="text-4xl font-bold text-center mb-12">Testimonios</h2>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+            {[
+              {
+                name: "Carlos",
+                feedback:
+                  "Gracias a la rutina generada, he logrado cumplir mis objetivos de manera eficiente. La personalización fue clave para alcanzar mis metas. La variedad en los ejercicios y la capacidad de ajustar los entrenamientos a mi nivel específico han sido muy valiosos.",
+                photo: "https://randomuser.me/api/portraits/men/1.jpg",
+              },
+              {
+                name: "Laura",
+                feedback:
+                  "La IA ajustó mis entrenamientos a mis necesidades específicas, ¡muy recomendable! Los resultados han sido sorprendentes. Nunca había experimentado un enfoque tan personalizado y efectivo en mis rutinas de entrenamiento.",
+                photo: "https://randomuser.me/api/portraits/women/1.jpg",
+              },
+              {
+                name: "Miguel",
+                feedback:
+                  "El plan que recibí es excelente. Las rutinas son variadas y se ajustan a mi nivel. Estoy muy satisfecho con el servicio. Además, el seguimiento constante y los ajustes recomendados me han ayudado a mantenerme motivado y progresar continuamente.",
+                photo: "https://randomuser.me/api/portraits/men/2.jpg",
+              },
+              {
+                name: "Sofia",
+                feedback:
+                  "Me encanta la flexibilidad de los horarios y la precisión de las rutinas. Sin duda, es la mejor inversión para mi salud. La capacidad de personalizar mi entrenamiento según mis horarios y objetivos ha sido un cambio total en mi rutina diaria.",
+                photo: "https://randomuser.me/api/portraits/women/2.jpg",
+              },
+              {
+                name: "Pedro",
+                feedback:
+                  "La plataforma ha transformado mi enfoque hacia el ejercicio. La personalización de las rutinas y los consejos proporcionados han mejorado significativamente mis resultados y mi bienestar general.",
+                photo: "https://randomuser.me/api/portraits/men/3.jpg",
+              },
+              {
+                name: "Ana",
+                feedback:
+                  "Excelente experiencia. La integración de la IA para crear rutinas a medida ha hecho que mis entrenamientos sean más efectivos y motivadores. Me siento más en forma y saludable.",
+                photo: "https://randomuser.me/api/portraits/women/3.jpg",
+              },
+            ].map((testimonial, index) => (
+              <motion.div
+                key={index}
+                className="p-6 border rounded-lg text-center"
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.5, delay: index * 0.2 }}
+              >
+                <img
+                  src={testimonial.photo}
+                  alt={testimonial.name}
+                  className="w-16 h-16 mx-auto rounded-full object-cover mb-4"
+                />
+                <p className="text-xl italic">"{testimonial.feedback}"</p>
+                <h4 className="mt-4 font-semibold">{testimonial.name}</h4>
+              </motion.div>
+            ))}
+          </div>
+        </div>
+      </motion.section>
+
+      {/* Call to Action Section */}
+      <motion.section
+        id="cta"
+        ref={ctaSectionRef} // Ref agregado aquí
+        className="py-20 bg-gradient-to-r from-[#6E54B5] to-[#8561B5] text-white text-center"
+        initial="hidden"
+        whileInView="visible"
+        viewport={{ once: false, amount: 0.3 }}
+        transition={{ duration: 0.8 }}
+        variants={sectionVariants}
+      >
+        <div className="max-w-6xl mx-auto px-4">
+          <h2 className="text-4xl font-bold mb-4">¡Comienza Hoy!</h2>
+          <p className="text-xl mb-8">
+            Crea una rutina personalizada y comienza tu camino hacia un mejor tú.
+          </p>
+          <a
+            href="#cta"
+            className="inline-block px-8 py-4 bg-white text-[#6E54B5] font-bold rounded-full hover:bg-gray-100 transition-all duration-300"
+          >
+            Regístrate
+          </a>
+        </div>
+      </motion.section>
+
+      <footer className="bg-gray-800 text-white py-6 text-center">
+        <p>© 2024 Generador de Rutinas con IA. Todos los derechos reservados.</p>
+      </footer>
     </div>
   );
 }
-
-export default SubscriptionPage;
